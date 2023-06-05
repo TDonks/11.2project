@@ -9,18 +9,17 @@ HC_SR04 distFinder = HC_SR04(trigPin, echoPin);
 
 void setup()
 {
-	Serial.begin(9600);       
 }
 
 void loop()
 {
-  delay(10000);
+  delay(2000);
   
   distInCm = distFinder.getDistanceCM();   
   
   Particle.publish("temp", String(distInCm), PRIVATE);
   
-  if(rangeInCm < minDist){
+  if(distInCm < minDist){
       Particle.publish("trigger", String(distInCm), PRIVATE);
   }
 }
